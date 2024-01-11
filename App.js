@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,23 +7,33 @@ import {
   TextInput,
   Button,
   StyleSheet,
-} from 'react-native';
-import SuccessModal from './src/Components/Modal';
-import TimeSlots from './src/Components/TimeSlots';
-
+} from "react-native";
+import SuccessModal from "./src/Components/Modal";
+import TimeSlots from "./src/Components/TimeSlots";
 
 const App = () => {
   const [timeSlots, setTimeSlots] = useState(TimeSlots);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  // Basic email validation using regex
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // Basic name validation (minimum 2 characters)
+  const isValidName = (name) => {
+    return name.length > 1;
+  };
 
   const handleTimeSlotPress = (item) => {
     if (item.available) {
       setSelectedTimeSlot(item);
-      setIsFormValid(name !== '' && email !== '');
+      setIsFormValid(isValidName(name) && isValidEmail(email));
     }
   };
 
@@ -32,13 +42,10 @@ const App = () => {
       const updatedTimeSlots = timeSlots.map((slot) =>
         slot.id === selectedTimeSlot.id ? { ...slot, available: false } : slot
       );
-
       // Show the success modal
       setIsModalVisible(true);
-
-
-      setName('');
-      setEmail('');
+      setName("");
+      setEmail("");
       setSelectedTimeSlot(null);
       setIsFormValid(false);
       setTimeSlots(updatedTimeSlots);
@@ -60,10 +67,10 @@ const App = () => {
               {
                 backgroundColor:
                   item.available && selectedTimeSlot?.id === item.id
-                    ? '#00bcd4'
+                    ? "#bf7e9f"
                     : item.available
-                      ? '#4CAF50'
-                      : '#FF5722',
+                      ? "#4CAF50"
+                      : "#f20f12",
               },
             ]}
             onPress={() => handleTimeSlotPress(item)}
@@ -71,7 +78,7 @@ const App = () => {
             <Text style={styles.timeText}>{item.time}</Text>
             <Text style={styles.dateText}>{item.date}</Text>
             <Text style={styles.availabilityText}>
-              {item.available ? 'Available' : 'Booked'}
+              {item.available ? "Available" : "Booked"}
             </Text>
           </TouchableOpacity>
         )}
@@ -84,7 +91,7 @@ const App = () => {
         value={name}
         onChangeText={(text) => {
           setName(text);
-          setIsFormValid(text !== '' && email !== '');
+          setIsFormValid(isValidName(text) && isValidEmail(email));
         }}
       />
       <TextInput
@@ -93,7 +100,7 @@ const App = () => {
         value={email}
         onChangeText={(text) => {
           setEmail(text);
-          setIsFormValid(text !== '' && name !== '');
+          setIsFormValid(isValidName(text) && isValidEmail(email));
         }}
       />
       <Button
@@ -101,7 +108,6 @@ const App = () => {
         onPress={handleBooking}
         disabled={!isFormValid || !selectedTimeSlot}
       />
-
 
       <SuccessModal
         visible={isModalVisible}
@@ -118,12 +124,12 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
   },
   sectionTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: 20,
     marginBottom: 10,
   },
@@ -134,20 +140,20 @@ const styles = StyleSheet.create({
   },
   timeText: {
     fontSize: 16,
-    fontWeight: 'bold',
-    color: '#fff',
+    fontWeight: "bold",
+    color: "#fff",
   },
   dateText: {
     fontSize: 14,
-    color: '#fff',
+    color: "#fff",
   },
   availabilityText: {
     fontSize: 14,
-    color: '#fff',
+    color: "#fff",
   },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 1,
     marginBottom: 10,
     padding: 10,
