@@ -17,7 +17,7 @@ Make sure you have the following installed:
  - Node.js
  - Expo CLI
 
-####Installation
+#### Installation
 - Clone the repository:
 ```sh
 git clone https://github.com/sreedevi111/Saloonify.git
