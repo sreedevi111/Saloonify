@@ -37,9 +37,18 @@ expo start
 Scan the QR code with the Expo Go app on your mobile device or run the app on an emulator.
 
 #### App Structure
-src/Components/Modal: Success modal component.
-src/Components/TimeSlots: Time slots data.
-App.js: Main application file containing the booking logic.
+- src/Components/Modal: Success modal component.
+- src/Components/TimeSlots: Time slots data.
+- App.js: Main application file containing the booking logic.
 
 #### Screenshots
+
+<img width="317" alt="Screenshot 2024-01-11 at 19 15 40" src="https://github.com/sreedevi111/Saloonify/assets/72161804/c854fa66-a8e7-4572-bc12-689f990bf016">
+
+<img width="331" alt="Screenshot 2024-01-11 at 19 16 08" src="https://github.com/sreedevi111/Saloonify/assets/72161804/5346e89f-2d9b-4d36-a202-d141026daaa4">
+
+<img width="324" alt="Screenshot 2024-01-11 at 19 16 24" src="https://github.com/sreedevi111/Saloonify/assets/72161804/ce07a20f-465f-4b38-84a2-6424cfcfeeb0">
+
+
+
 
